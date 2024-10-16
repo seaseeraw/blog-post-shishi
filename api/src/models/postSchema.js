@@ -38,3 +38,7 @@ export const getPost = async () => {
   const data = await Post.find().populate("author").exec();
   return data;
 };
+
+export const deletePostById = async (postId) => {
+  return Post.findByIdAndDelete(postId); // Mongoose method to delete a post by ID
+};

@@ -34,3 +34,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/v1/post
+
+###
+DELETE http://localhost:3000/api/v1/post/670f2fbef98052f559483f8b'
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NzBmMjViNDJmY2Y4MjllZGU0NjkyOWMiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzI5MDUwNDk2LCJleHAiOjE3MjkxMzY4OTZ9.Sy_nf2PxyIX5BWM4zZGLnCADG3QngKz5rc1WP9rqlGs

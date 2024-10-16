@@ -1,11 +1,12 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
-import { createPost, getPost } from "../models/postSchema.js";
+import { createPost, getPost,deletePostById } from "../models/postSchema.js";
 import { authenticateJwt } from "../middleware/authenticate.js";
 
 const router = express.Router();
 const jwtSecret = config.jwtSecret;
+
 
 router.get("/", async (req, res) => {
   const postData = await getPost();
@@ -37,6 +38,43 @@ router.post("/", authenticateJwt, async (req, res) => {
   };
 
   return res.status(200).send(respObj);
+});
+
+// delete
+
+router.delete("/:postId", authenticateJwt, async (req, res) => {
+  const { postId } = req.params;
+  const { user } = req;
+
+  try {
+    
+    const post = await getPost(postId);
+    console.log(post);
+    console.log(user);
+    if (!post) {
+      return res.status(404).send({
+        status: false,
+        message: "Post not found",
+      });
+    }
+
+    // Delete the post
+    await deletePostById(postId);
+
+    return res.status(200).send({
+      status: true,
+      message: "Post deleted successfully",
+    });
+
+  } catch (error) {
+
+    console.log(error);
+    return res.status(500).send({
+      status: false,
+      message: "An error occurred while deleting the post",
+      // error: error.message,
+    });
+  }
 });
 
 export default router;
